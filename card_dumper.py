@@ -1,291 +1,258 @@
 #!/usr/bin/env python3
 import os
 import sys
-import uproot
 import numpy
 
-from configs.singlelepton_analysis.systematic_configs import systematic_configs
+from plotter.configs.singlelepton_analysis.systematic_configs import systematic_configs
+from plotter.configs.singlelepton_analysis.hist_configs import hist_configs
+from plotter.configs.singlelepton_analysis.sample_configs import sample_configs
+from plotter.configs.singlelepton_analysis.region_configs import region_configs
+from plotter.include.args_parser import args
 
 cwd = os.getcwd()
 
-try:
-    campaigns = [sys.argv[1]]
-except:
-    campaigns = ["2016preVFP", "2016postVFP", "2017", "2018"]
-try:
-    variables = [sys.argv[2]]
-except:
-    variables = ["n_events_weighted", "masst_recopriboson"]
+variables_for_limit = ["masst_recopriboson"]
 
-rootfiles_path = ""
-cards_path = ""
-workspace_path = ""
+masses_to_plot = []
+masses_to_prepare = []
+masses = ["500", "600", "700", "800", "1000", "1200", "1500", "2000"]
+for mass in masses:
+    masses_to_prepare.append(f"MN__equal__{mass}GeV.txt")
+    if mass == "500" or mass == "800" :
+        masses_to_plot.append(f"MN__equal__{mass}GeV.txt")
 
+variables = []
+for key in list(hist_configs.keys()):
+    variables.append(key)
 
-def check_root_files(variable, campaign):
+flag_campaign = args.campaign
+flag_channel = args.channel
+flag_combine = args.combine
 
-    global rootfiles_path
-    global cards_path
-    global workspace_path
+rootfiles_path = f"{cwd}/plotter/outputs/yields/{flag_campaign}/"
+systematics = {}
+systematics_treat = {}
+systematics_type = {}
+systematics_sample = {}
+systematics_campaign = {}
+systematics_variation = {}
+systematics_special = {}
+for syst_source in list(systematic_configs.keys()):
+    syst_variation = systematic_configs[syst_source]["variation"]
+    syst_type = systematic_configs[syst_source]["type"]
+    if syst_variation == "updown" :
+        systematics[syst_source] = "1"
+        systematics_treat[syst_source] = "shapeN2"
+        systematics_type[syst_source] = syst_type
+        systematics_variation[syst_source] = syst_variation
+    elif syst_variation == "lognormal" :
+        systematics[syst_source] = systematic_configs[syst_source][flag_campaign]
+        systematics_treat[syst_source] = "lnN"
+        systematics_type[syst_source] = syst_type
+        systematics_variation[syst_source] = syst_variation
+    elif syst_variation == "other":
+        syst_name = systematic_configs[syst_source]["name"]
+        syst_sample = systematic_configs[syst_source]["sample"]
+        systematics_sample[syst_name] = syst_sample
+        systematics_type[syst_name] = syst_type
+        systematics_variation[syst_name] = syst_variation
+        if syst_name == "TopPtReweight":
+            systematics[syst_name] = "-"
+            systematics_special[syst_name] = "1"
+            systematics_treat[syst_name] = "shapeN2"
+        elif syst_name == "Scale":
+            systematics[syst_name] = "-"
+            systematics_special[syst_name] = systematic_configs[syst_source]["value"]
+            systematics_treat[syst_name] = "lnN"
+        elif syst_name == "PDF":
+            systematics[syst_name] = "-"
+            systematics_special[syst_name] = systematic_configs[syst_source]["value"]
+            systematics_treat[syst_name] = "lnN"
 
-    rootfiles = []
+samples = []
+for sample_source in sample_configs["background"]:
+    if sample_source == "Others": continue
+    samples.append(sample_source)
+for sample_source in sample_configs["signal"]:
+    samples.append(sample_source)
 
-    for rootfile in os.listdir(rootfiles_path):
+regions = []
+for region_source in region_configs[flag_channel]:
+    for region_selection in region_configs[flag_channel][region_source]:
+        regions.append(f"{region_source}{region_selection}")
 
-        if (variable in rootfile):
+def get_process_index(sample):
 
-            if not rootfile.endswith(".root"):
-                continue
+    if "MN__equal" in sample: return 0
+    elif "Top__space__Pair" in sample: return 1
+    elif "Single__space__Top" in sample: return 2
+    elif "V__plus__Jets" in sample: return 3
+    elif "VV__comma__VVV" in sample: return 4
+    elif "Others" in sample: return 5
+    else:
+        sys.exit("unknown process index " + sample)
 
-            if (("SignalRegion" in rootfile) or ("ControlRegion" in rootfile)) and ("Selection" in rootfile) :
-                print (f"Including {rootfile}")
-                rootfiles.append(rootfile)
-            else:
-                print (f"Skipping {rootfile}")
-                continue
+def dump_cards(variable, region, card_path, rootfile):
 
-    return rootfiles
+    this_rootfile = f"{rootfiles_path}/{rootfile}"
 
-def write_data_card(rootfile, variable, campaign):
+    signals = []
+    backgrounds = []
+    for sample in samples:
+        if not "MN__equal" in sample:
+            backgrounds.append(sample)
+        else:
+            signals.append(sample)
 
-    global rootfiles_path
-    global cards_path
-    global workspace_path
+    for signal in signals:
+        with open(f"{card_path}/{signal}.txt", "w") as write_file:
+            write_file.write("imax 1\n")
+            write_file.write("jmax *\n")
+            write_file.write("kmax *\n")
+            write_file.write("--------------------------------------\n")
+            write_file.write(f"shapes * * {rootfiles_path}/{rootfile} $PROCESS;1 $PROCESS_$SYSTEMATIC;1\n")
+            write_file.write(f"shapes data_obs * {rootfiles_path}/{rootfile} data;1\n")
+            write_file.write("--------------------------------------\n")
+            write_file.write(f"bin {region}\n")
+            write_file.write("observation -1\n")
+            write_file.write("--------------------------------------\n")
+            this_bin_line = f"bin {region} "
+            this_process_line = f"process {signal} "
+            this_index_line = "process 0 "
+            this_rate_line = "rate -1 "
+            for background in backgrounds:
+                this_bin_line = f"{this_bin_line}{region} "
+                this_process_line = f"{this_process_line}{background} "
+                this_index_line = f"{this_index_line}{get_process_index(background)} "
+                this_rate_line = f"{this_rate_line}-1 "
+            write_file.write(f"{this_bin_line}\n")
+            write_file.write(f"{this_process_line}\n")
+            write_file.write(f"{this_index_line}\n")
+            write_file.write(f"{this_rate_line}\n")
+            write_file.write("--------------------------------------\n")
+            for systematic in (systematics.keys()):
+                if systematics_type[systematic] == "correlated": this_systematic = systematic
+                else: this_systematic = f"{systematic}_{flag_campaign}"
+                this_syst_treat = systematics_treat[systematic]
+                this_syst_line = f"{this_systematic} {this_syst_treat} "
+                try:
+                    if "MN__equal" in systematics_sample[systematic]:
+                        this_syst_line = f"{this_syst_line}{systematics_special[systematic]} "
+                    else:
+                        this_syst_line = f"{this_syst_line}{systematics[systematic]} "
+                except:
+                    this_syst_line = f"{this_syst_line}{systematics[systematic]} "
 
-    file_name = rootfile.replace(".root", "")
-    data_cards = {}
+                for background in backgrounds:
+                    if systematics_variation[systematic] == "other":
+                        if systematics_sample[systematic] in background:
+                            this_syst_value = systematics_special[systematic]
+                        else:
+                            this_syst_value = systematics[systematic]
+                    else:
+                        this_syst_value = systematics[systematic]
+                    this_syst_line = f"{this_syst_line}{this_syst_value} "
+                write_file.write(f"{this_syst_line}\n")
+            write_file.write("--------------------------------------\n")
+            write_file.write(f"{region} autoMCStats 0 1 1\n")
+            if ("ControlRegion" in region):
+                if ("DomTT" in region):
+                    write_file.write(f"rate_{region}_{flag_campaign} rateParam {region} Top__space__Pair 1\n")
+                elif ("DomW" in region):
+                    write_file.write(f"rate_{region}_{flag_campaign} rateParam {region} V__plus__Jets 1\n")
 
-    with uproot.open(f"{rootfiles_path}/{rootfile}") as this_rootfile:
+def run_combine_for_plot(mass, variable, workspace_path):
 
-        fake_keys = this_rootfile.keys()
-        keys = []
-        for fake_key in fake_keys:
-            store_key = True
-            for syst in list(systematic_configs.keys()):
-                if syst in fake_key:
-                    store_key = False
-                    break
-            if store_key:
-                keys.append(fake_key)
+    cards_to_convert = os.listdir(workspace_path)
+    
+    os.chdir(workspace_path)
+    
+    for card_to_convert in cards_to_convert:
+        if not mass in card_to_convert:
+            continue
+        text2workspace = f"text2workspace.py {card_to_convert} -m 125 -o {card_to_convert.replace('.txt', '.root')}"
+        combine = f"combine -M FitDiagnostics {card_to_convert.replace('.txt', '.root')} -m 125 --rMin -5 --rMax 5 --saveShapes --saveWithUncertainties --name {card_to_convert.replace('.txt', '')} > {card_to_convert.replace('.txt', '.log')}"
+        os.system(text2workspace)
+        sleep_count = 0
+        while (not os.path.exists(card_to_convert.replace('.txt', '.root'))):
+            sleep_count = sleep_count + 1
+            os.system("sleep 2")
+            if (sleep_count > 5):
+                print(f"sleep count exceeded, issues with {card_to_convert.replace('.txt', '.root')}")
+                break
+        os.system(combine)
 
-        signal_names = []
-        background_names = []
-        for key in keys:
-            if key.startswith("data"):
-                continue
-
-            if key.startswith("MN"):
-                signal_names.append(key.replace(';1',''))
-            else:
-                background_names.append(key.replace(';1',''))
-
-        if not os.path.exists(f"{cards_path}/{variable}"):
-            os.system(f"mkdir -p {cards_path}/{variable}")
-
-        for signal_name in signal_names:
-            card_path = f"{cards_path}/{variable}/{signal_name}_{file_name}.txt"
-            card_write = open(card_path, "w")
-            card_write.write("imax 1\n")
-            card_write.write("jmax *\n")
-            card_write.write("kmax *\n")
-            card_write.write("--------------------------------------\n")
-            card_write.write(f"shapes * * {rootfiles_path}/{rootfile} $PROCESS;1 $PROCESS_$SYSTEMATIC;1\n")
-            card_write.write(f"shapes data_obs * {rootfiles_path}/{rootfile} data;1\n")
-            card_write.write("--------------------------------------\n")
-            card_write.write(f"bin {file_name}\n")
-            card_write.write("observation -1\n")
-            card_write.write("--------------------------------------\n")
-            card_write.write(f"bin {file_name} ")
-            for background_name in background_names:
-                card_write.write(f"{file_name} ")
-            card_write.write("\n")
-            card_write.write(f"process {signal_name} ")
-            for background_name in background_names:
-                card_write.write(f"{background_name} ")
-            card_write.write("\n")
-            card_write.write("process 0 ")
-            syst_shape_sig = "1 "
-            syst_shape_all = "1 "
-            for i_process in range(len(background_names)):
-                card_write.write(f"{i_process+1} ")
-                syst_shape_sig = f"{syst_shape_sig}- "
-                syst_shape_all = f"{syst_shape_all}1 "
-
-            card_write.write("\n")
-            card_write.write("rate -1 ")
-            for i_process in range(len(background_names)):
-                card_write.write("-1 ")
-            card_write.write("\n")
-            card_write.write("--------------------------------------\n")
-
-            for syst in list(systematic_configs.keys()):
-                if systematic_configs[syst]["type"] == "shapeyear":
-                    card_write.write(f"{syst}_{campaign} shapeN2 {syst_shape_all}\n")
-                elif systematic_configs[syst]["type"] == "shape":
-                    card_write.write(f"{syst} shapeN2 {syst_shape_all}\n")
-                elif systematic_configs[syst]["type"] == "off":
-                    continue
-                elif systematic_configs[syst]["type"] == "other":
-                    syst_type = systematic_configs[syst][campaign].split("__")[0]
-                    syst_value = systematic_configs[syst][campaign].split("__")[1] 
-                    card_write.write(f"{syst} {syst_type} {syst_value} ")
-                    for i_process in range(len(background_names)):
-                        card_write.write(f"{syst_value} ")
-                    card_write.write("\n")
-
-                else:
-                    print (f"Warning : unknown systematic type = {systematic_configs[syst]['type']}")
-                    continue
-            card_write.write("--------------------------------------\n")
-            card_write.write(f"{file_name} autoMCStats 0 1 1\n")
-            if "Resolved" in file_name:
-                card_write.write(f"rate_ResolvedDomTT_{campaign} rateParam {file_name} Top__space__Pair 1\n")
-                card_write.write(f"rate_ResolvedDomW_{campaign} rateParam {file_name} V__plus__Jets 1\n")
-            if "Merged" in file_name:
-                card_write.write(f"rate_MergedDomTT_{campaign} rateParam {file_name} Top__space__Pair 1\n")
-                card_write.write(f"rate_MergedDomW_{campaign} rateParam {file_name} V__plus__Jets 1\n")
-
-            card_write.close()
-
-def merge_data_card(variable, campaign):
-
-    global rootfiles_path
-    global cards_path
-    global workspace_path
-
-    cards = os.listdir(f"{cards_path}/{variable}/")
-
-    combineCards = "combineCards.py "
-  
-    channels = ["Electron", "Muon"]
-
-    for channel in channels:
-        mass_points = []
-
-        if not os.path.exists(f"{workspace_path}/{variable}/{channel}"):
-            os.system(f"mkdir -p {workspace_path}/{variable}/{channel}")
-
-        for card in cards:
-            if channel in card:
-                os.system(f"mv {cards_path}/{variable}/{card} {workspace_path}/{variable}/{channel}/")
-                mass_point = f'{card.split("GeV_")[0]}GeV'
-
-                mass_points.append(mass_point)
-
-        mass_points = set(mass_points)
-        for mass_point in mass_points:
-            sandbox_path = f"{workspace_path}/{variable}/{channel}/{mass_point}/"
-            if not os.path.exists(sandbox_path):
-                os.system(f"mkdir -p {sandbox_path}")
-            os.chdir(f"{workspace_path}/{variable}/{channel}")
-            os.system(f"mv *{mass_point}*{channel}*txt {mass_point}/")
-
-            cards_to_combine = os.listdir(sandbox_path)
-            signal_cards = []
-            control_cards = []
-
-            for card in sorted(cards_to_combine):
-                if "Signal" in card:
-                    signal_cards.append(card)
-                elif "Control" in card:
-                    control_cards.append(card)
-
-            combineCards = "combineCards.py"
-            combineCardsMerged = "combineCards.py"
-            combineCardsResolved = "combineCards.py"
-            for i in range(len(signal_cards)):
-                combineCards = f"{combineCards} SIGNAL{i}={signal_cards[i]} "
-                if "Merged" in signal_cards[i]:
-                    combineCardsMerged = f"{combineCardsMerged} SIGNAL{i}={signal_cards[i]} "
-                elif "Resolved" in signal_cards[i]:
-                    combineCardsResolved = f"{combineCardsMerged} SIGNAL{i}={signal_cards[i]} "
-            for i in range(len(control_cards)):
-                combineCards = f"{combineCards} CONTROL{i}={control_cards[i]} "
-                if "Merged" in control_cards[i]:
-                    combineCardsMerged = f"{combineCardsMerged} CONTROL{i}={control_cards[i]} "
-                elif "Resolved" in control_cards[i]:
-                    combineCardsResolved = f"{combineCardsMerged} CONTROL{i}={control_cards[i]} "
-
-            os.chdir(f"{workspace_path}/{variable}/{channel}/{mass_point}/")
-            os.system(f"{combineCards}  > {mass_point}__{channel}__CombinedFinal.txt")
-            os.system(f"{combineCardsMerged}  > {mass_point}__{channel}__MergedFinal.txt")
-            os.system(f"{combineCardsResolved}  > {mass_point}__{channel}__ResolvedFinal.txt")
-
-            migrated_cards = os.listdir("./")
-            for card in migrated_cards:
-                if not "Final" in card:
-                    os.system(f"rm {card}")
-
-            os.chdir(sandbox_path)
+        fix_zombie = f"{cwd}/tmp/{flag_campaign}_{variable}_{card_to_convert.replace('.txt', '.sh')}"
+        with open (fix_zombie, "w") as write_zombie:
+            write_zombie.write(f"cd {workspace_path}\n")
+            write_zombie.write(f"{text2workspace}\n")
+            write_zombie.write(f"{combine}\n")
+            write_zombie.write(f"cd {cwd}\n")
 
     os.chdir(cwd)
 
-def write_wrapper():
+def combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge):
 
-    global workspace_path
+    os.chdir(workspace_path)
+
+    combinecards = "combineCards.py"
+    for card in cards_to_merge:
+        if "Selection" not in card:
+            continue
+        combinecards = f"{combinecards} {card}"
+    combinecards = f"{combinecards} > {flag_channel}_{flag_campaign}_{variable}_{mass}"
+    os.system(combinecards)
+    os.system(f"cp {flag_channel}_{flag_campaign}_{variable}_{mass} {cwd}/workspace/Combined/")
 
     os.chdir(cwd)
-
-    campaigns = os.listdir("workspace/")
-    dict_cards = {}
-    keys = {}
-    keys["campaign"] = []
-    keys["channel"] = []
-    keys["mass"] = []
-    observable = "masst_recopriboson"
-    for campaign in campaigns:
-        channels = os.listdir(f"workspace/{campaign}/{observable}/")
-        keys["campaign"].append(campaign)
-        for channel in channels:
-            masses = os.listdir(f"workspace/{campaign}/{observable}/{channel}/")
-            keys["channel"].append(channel)
-            for mass in masses:
-                this_card = f"workspace/{campaign}/{observable}/{channel}/{mass}/{mass}__{channel}__CombinedFinal.txt"
-                keys["mass"].append(mass)
-#                os.system(f"cp {this_card} tmp_{campaign}_this_card.txt")
-#                os.system("combine -M AsymptoticLimits -d tmp_{campaign}_this_card.txt --run blind > logs/{mass}__{channel}__Combined.log")
-
-    for mass in list(keys["mass"]):
-        for channel in list(keys["channel"]):
-            combineCards = "combineCards.py "
-            for campaign in list(keys["campaign"]):
-                this_card = f"workspace/{campaign}/{observable}/{channel}/{mass}/{mass}__{channel}__CombinedFinal.txt"
-                os.system(f"cp {this_card} tmp_{campaign}_{mass}__{channel}__CombinedFinal.txt")
-                combineCards = f"{combineCards} tmp_{campaign}_{mass}__{channel}__CombinedFinal.txt "
-            combineCards = f"{combineCards} > {mass}__{channel}__CombinedFinal.txt"
-            os.system(combineCards)
-            os.system("rm tmp_*__CombinedFinal.txt")
 
 def main():
 
-    global rootfiles_path
-    global cards_path
-    global workspace_path
+    cards_path = f"{cwd}/cards/{flag_campaign}/"
+    workspaces_path = f"{cwd}/workspace/{flag_campaign}/"
+    os.system("mkdir -p workspace/Combined/")
+    os.system("mkdir -p tmp")
+    rootfiles = os.listdir(rootfiles_path)
 
-    for campaign in campaigns:
+    if not flag_combine:
+        for variable in variables:
+            for region in regions:
+                card_path = f"{cards_path}/{variable}/{region}/"
+                if not os.path.exists(card_path):
+                    os.system(f"mkdir -p {card_path}")
 
-        rootfiles_path = f"{cwd}/outputs/yields/{campaign}"
-        cards_path = f"{cwd}/outputs/cards/{campaign}"
-        workspace_path = f"{cwd}/workspace/{campaign}"
-
-        if not os.path.exists(cards_path):
-            os.system(f"mkdir -p {cards_path}")
-            os.system(f"mkdir -p {workspace_path}")
+                for rootfile in rootfiles:
+                    if (variable in rootfile) and (region in rootfile):
+                        dump_cards(variable, region, card_path, rootfile)
 
         for variable in variables:
+            workspace_path = f"{workspaces_path}/{variable}/"
+            if not os.path.exists(workspace_path):
+                os.system(f"mkdir -p {workspace_path}")
+            for mass in masses_to_prepare:
+                for region in regions:
+                    card_file_from = f"{cards_path}/{variable}/{region}/{mass}"
+                    if os.path.exists(card_file_from):
+                        card_file_to = f"{workspace_path}/{region}_{mass}"
+                        os.system(f"cp {card_file_from} {card_file_to}")
 
-            rootfiles = check_root_files(variable, campaign)
-            print (" ------------------------------------------------ ")
-            print (f" Writing datacard for {campaign} : {variable} ")
-            print (" ------------------------------------------------ ")
+        for variable in variables:
+            workspace_path = f"{workspaces_path}/{variable}/"
+            for mass in masses_to_plot:
+                run_combine_for_plot(mass, variable, workspace_path)
 
-            for rootfile in rootfiles:
-
-                write_data_card(rootfile, variable, campaign)
-
-            merge_data_card(variable, campaign)
-
-    write_wrapper()
+    else:
+        for variable in variables_for_limit:
+            workspace_path = f"{workspaces_path}/{variable}/"
+            cards_in_workspace = os.listdir(workspace_path)
+            for mass in masses_to_prepare:
+                cards_to_merge = []
+                for card_in_workspace in cards_in_workspace:
+                    if not flag_channel in card_in_workspace:
+                        continue
+                    if mass in card_in_workspace:
+                        cards_to_merge.append(card_in_workspace)
+                combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge)
 
 if __name__ == "__main__":
 
