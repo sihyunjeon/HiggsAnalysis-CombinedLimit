@@ -1,0 +1,9 @@
+ <<< Combine >>> 
+>>> random number generator seed is 123456
+>>> method used is FitDiagnostics
+SimNLL created with 0 channels, 0 generic constraints, 30 fast gaussian constraints, 0 fast poisson constraints, 0 fast group constraints, 
+SimNLL created with 1 channels, 0 generic constraints, 30 fast gaussian constraints, 0 fast poisson constraints, 0 fast group constraints, 
+
+ --- FitDiagnostics ---
+Best fit r: -4.99994  -6.29417e-05/+9.99994  (68% CL)
+Done in 0.22 min (cpu), 0.22 min (real)
