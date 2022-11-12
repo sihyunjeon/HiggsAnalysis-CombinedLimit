@@ -1,0 +1,535 @@
+ <<< Combine >>> 
+>>> random number generator seed is 123456
+Will use a-priori expected background instead of a-posteriori one.
+>>> method used is AsymptoticLimits
+Channel ch1_ch1 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch1
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          75.638939       2.049960        total sum                     
+0          1361.000000     36.891733       Unweighted events, alpha=0.055576
+  => Total parameter prop_binch1_ch1_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          144.555528      3.972265        total sum                     
+1          1324.000000     36.386811       Unweighted events, alpha=0.109181
+  => Total parameter prop_binch1_ch1_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          66.758854       3.343309        total sum                     
+2          399.000000      19.974984       Unweighted events, alpha=0.167315
+  => Total parameter prop_binch1_ch1_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          57.832784       3.662918        total sum                     
+3          249.000000      15.779734       Unweighted events, alpha=0.232260
+  => Total parameter prop_binch1_ch1_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch1_ch2 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch2
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          95.254171       13.229536       total sum                     
+0          52.000000       7.211103        Unweighted events, alpha=1.831811
+  => Total parameter prop_binch1_ch2_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          227.632630      12.153793       total sum                     
+1          351.000000      18.734994       Unweighted events, alpha=0.648526
+  => Total parameter prop_binch1_ch2_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          153.286842      11.430049       total sum                     
+2          180.000000      13.416408       Unweighted events, alpha=0.851594
+  => Total parameter prop_binch1_ch2_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          177.997845      9.783464        total sum                     
+3          331.000000      18.193405       Unweighted events, alpha=0.537758
+  => Total parameter prop_binch1_ch2_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch1_ch3 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch3
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          8996.658048     232.504573      total sum                     
+0          1497.000000     38.691084       Unweighted events, alpha=6.009792
+  => Total parameter prop_binch1_ch3_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          10627.297278    153.751730      total sum                     
+1          4778.000000     69.123079       Unweighted events, alpha=2.224215
+  => Total parameter prop_binch1_ch3_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          6596.384128     95.389697       total sum                     
+2          4782.000000     69.152006       Unweighted events, alpha=1.379420
+  => Total parameter prop_binch1_ch3_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          11993.633963    105.369804      total sum                     
+3          12956.000000    113.824426      Unweighted events, alpha=0.925720
+  => Total parameter prop_binch1_ch3_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch1_ch4 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch4
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          12449.137891    48.810964       total sum                     
+0          65049.000000    255.047054      Unweighted events, alpha=0.191381
+  => Total parameter prop_binch1_ch4_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          16480.205432    57.758392       total sum                     
+1          81413.000000    285.329634      Unweighted events, alpha=0.202427
+  => Total parameter prop_binch1_ch4_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          8657.559596     40.543093       total sum                     
+2          45599.000000    213.539224      Unweighted events, alpha=0.189863
+  => Total parameter prop_binch1_ch4_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          6805.840727     39.151486       total sum                     
+3          30218.000000    173.833253      Unweighted events, alpha=0.225225
+  => Total parameter prop_binch1_ch4_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch1_ch5 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch5
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          804.206245      13.631062       total sum                     
+0          3481.000000     59.000000       Unweighted events, alpha=0.231027
+  => Total parameter prop_binch1_ch5_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          1129.428224     16.361256       total sum                     
+1          4765.000000     69.028979       Unweighted events, alpha=0.237026
+  => Total parameter prop_binch1_ch5_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          642.299253      12.447061       total sum                     
+2          2663.000000     51.604263       Unweighted events, alpha=0.241194
+  => Total parameter prop_binch1_ch5_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          529.406834      13.943150       total sum                     
+3          1442.000000     37.973675       Unweighted events, alpha=0.367134
+  => Total parameter prop_binch1_ch5_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch1_ch6 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch1_ch6
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          4405.585504     79.421303       total sum                     
+0          3077.000000     55.470713       Unweighted events, alpha=1.431779
+  => Total parameter prop_binch1_ch6_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          7141.975101     100.273245      total sum                     
+1          5073.000000     71.224996       Unweighted events, alpha=1.407841
+  => Total parameter prop_binch1_ch6_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          4048.557474     65.844186       total sum                     
+2          3781.000000     61.489837       Unweighted events, alpha=1.070764
+  => Total parameter prop_binch1_ch6_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          3321.694304     54.847231       total sum                     
+3          3668.000000     60.564016       Unweighted events, alpha=0.905587
+  => Total parameter prop_binch1_ch6_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch1 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch1
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          46.885734       1.648248        total sum                     
+0          809.000000      28.442925       Unweighted events, alpha=0.057955
+  => Total parameter prop_binch2_ch1_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          93.137454       2.553536        total sum                     
+1          1330.000000     36.469165       Unweighted events, alpha=0.070028
+  => Total parameter prop_binch2_ch1_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          43.300710       1.397927        total sum                     
+2          959.000000      30.967725       Unweighted events, alpha=0.045152
+  => Total parameter prop_binch2_ch1_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          39.809708       1.930645        total sum                     
+3          425.000000      20.615528       Unweighted events, alpha=0.093670
+  => Total parameter prop_binch2_ch1_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch2 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch2
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          63.201559       5.637616        total sum                     
+0          126.000000      11.224972       Unweighted events, alpha=0.501600
+  => Total parameter prop_binch2_ch2_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          166.792654      9.863866        total sum                     
+1          286.000000      16.911535       Unweighted events, alpha=0.583191
+  => Total parameter prop_binch2_ch2_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          105.945035      7.474802        total sum                     
+2          201.000000      14.177447       Unweighted events, alpha=0.527090
+  => Total parameter prop_binch2_ch2_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          125.155320      5.531501        total sum                     
+3          512.000000      22.627417       Unweighted events, alpha=0.244444
+  => Total parameter prop_binch2_ch2_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch3 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch3
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          6354.556765     116.364474      total sum                     
+0          2982.000000     54.607692       Unweighted events, alpha=2.130971
+  => Total parameter prop_binch2_ch3_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          7592.771247     111.606284      total sum                     
+1          4628.000000     68.029405       Unweighted events, alpha=1.640616
+  => Total parameter prop_binch2_ch3_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          4748.599231     76.615941       total sum                     
+2          3841.000000     61.975802       Unweighted events, alpha=1.236292
+  => Total parameter prop_binch2_ch3_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          8344.083184     69.105592       total sum                     
+3          14579.000000    120.743530      Unweighted events, alpha=0.572336
+  => Total parameter prop_binch2_ch3_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch4 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch4
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          8611.795712     34.297639       total sum                     
+0          63046.000000    251.089625      Unweighted events, alpha=0.136595
+  => Total parameter prop_binch2_ch4_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          11604.613938    41.097430       total sum                     
+1          79732.000000    282.368553      Unweighted events, alpha=0.145545
+  => Total parameter prop_binch2_ch4_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          6044.983489     29.088598       total sum                     
+2          43186.000000    207.812415      Unweighted events, alpha=0.139976
+  => Total parameter prop_binch2_ch4_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          4797.251166     26.716182       total sum                     
+3          32243.000000    179.563359      Unweighted events, alpha=0.148784
+  => Total parameter prop_binch2_ch4_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch5 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch5
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          523.790067      8.767879        total sum                     
+0          3569.000000     59.741108       Unweighted events, alpha=0.146761
+  => Total parameter prop_binch2_ch5_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          753.356491      13.093222       total sum                     
+1          3311.000000     57.541290       Unweighted events, alpha=0.227531
+  => Total parameter prop_binch2_ch5_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          422.573826      9.107235        total sum                     
+2          2153.000000     46.400431       Unweighted events, alpha=0.196272
+  => Total parameter prop_binch2_ch5_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          355.167780      7.740339        total sum                     
+3          2105.000000     45.880279       Unweighted events, alpha=0.168726
+  => Total parameter prop_binch2_ch5_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch2_ch6 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch2_ch6
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          2955.925539     57.299600       total sum                     
+0          2661.000000     51.584882       Unweighted events, alpha=1.110833
+  => Total parameter prop_binch2_ch6_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          4741.248302     67.366133       total sum                     
+1          4953.000000     70.377553       Unweighted events, alpha=0.957248
+  => Total parameter prop_binch2_ch6_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          2735.977274     46.597774       total sum                     
+2          3447.000000     58.711157       Unweighted events, alpha=0.793727
+  => Total parameter prop_binch2_ch6_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          2219.803899     36.006421       total sum                     
+3          3801.000000     61.652251       Unweighted events, alpha=0.584005
+  => Total parameter prop_binch2_ch6_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch1 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch1
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          23.372518       1.321033        total sum                     
+0          313.000000      17.691806       Unweighted events, alpha=0.074673
+  => Total parameter prop_binch3_ch1_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          40.911349       1.354824        total sum                     
+1          912.000000      30.199338       Unweighted events, alpha=0.044859
+  => Total parameter prop_binch3_ch1_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          19.855770       2.332999        total sum                     
+2          72.000000       8.485281        Unweighted events, alpha=0.275775
+  => Total parameter prop_binch3_ch1_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          16.163444       0.983208        total sum                     
+3          270.000000      16.431677       Unweighted events, alpha=0.059865
+  => Total parameter prop_binch3_ch1_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch2 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch2
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          23.550400       2.694174        total sum                     
+0          76.000000       8.717798        Unweighted events, alpha=0.309874
+  => Total parameter prop_binch3_ch2_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          65.884553       3.756987        total sum                     
+1          308.000000      17.549929       Unweighted events, alpha=0.213911
+  => Total parameter prop_binch3_ch2_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          41.866989       2.905578        total sum                     
+2          208.000000      14.422205       Unweighted events, alpha=0.201284
+  => Total parameter prop_binch3_ch2_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          53.175255       2.862467        total sum                     
+3          345.000000      18.574176       Unweighted events, alpha=0.154131
+  => Total parameter prop_binch3_ch2_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch3 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch3
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          2520.206622     46.702243       total sum                     
+0          2912.000000     53.962950       Unweighted events, alpha=0.865456
+  => Total parameter prop_binch3_ch3_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          2981.189723     43.597279       total sum                     
+1          4676.000000     68.381284       Unweighted events, alpha=0.637551
+  => Total parameter prop_binch3_ch3_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          1979.691656     28.592952       total sum                     
+2          4794.000000     69.238717       Unweighted events, alpha=0.412952
+  => Total parameter prop_binch3_ch3_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          3332.268793     29.597659       total sum                     
+3          12676.000000    112.587744      Unweighted events, alpha=0.262880
+  => Total parameter prop_binch3_ch3_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch4 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch4
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          3329.041744     16.686808       total sum                     
+0          39801.000000    199.501880      Unweighted events, alpha=0.083642
+  => Total parameter prop_binch3_ch4_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          4365.242618     18.034639       total sum                     
+1          58587.000000    242.047516      Unweighted events, alpha=0.074509
+  => Total parameter prop_binch3_ch4_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          2238.544559     13.139478       total sum                     
+2          29025.000000    170.367250      Unweighted events, alpha=0.077125
+  => Total parameter prop_binch3_ch4_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          1741.136345     11.644139       total sum                     
+3          22359.000000    149.529261      Unweighted events, alpha=0.077872
+  => Total parameter prop_binch3_ch4_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch5 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch5
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          259.599187      5.121738        total sum                     
+0          2569.000000     50.685304       Unweighted events, alpha=0.101051
+  => Total parameter prop_binch3_ch5_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          383.269778      7.128858        total sum                     
+1          2890.000000     53.758720       Unweighted events, alpha=0.132619
+  => Total parameter prop_binch3_ch5_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          214.803557      4.943770        total sum                     
+2          1888.000000     43.451122       Unweighted events, alpha=0.113773
+  => Total parameter prop_binch3_ch5_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          173.227615      4.347310        total sum                     
+3          1588.000000     39.849718       Unweighted events, alpha=0.109085
+  => Total parameter prop_binch3_ch5_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch3_ch6 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch3_ch6
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          1370.938214     24.376333       total sum                     
+0          3163.000000     56.240555       Unweighted events, alpha=0.433430
+  => Total parameter prop_binch3_ch6_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          2191.314492     30.518558       total sum                     
+1          5156.000000     71.805292       Unweighted events, alpha=0.425003
+  => Total parameter prop_binch3_ch6_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          1274.953939     21.170364       total sum                     
+2          3627.000000     60.224580       Unweighted events, alpha=0.351517
+  => Total parameter prop_binch3_ch6_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          1064.193996     17.296740       total sum                     
+3          3785.000000     61.522354       Unweighted events, alpha=0.281161
+  => Total parameter prop_binch3_ch6_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch1 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch1
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          26.471862       1.193899        total sum                     
+0          492.000000      22.181073       Unweighted events, alpha=0.053805
+  => Total parameter prop_binch4_ch1_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          49.071095       1.734699        total sum                     
+1          800.000000      28.284271       Unweighted events, alpha=0.061339
+  => Total parameter prop_binch4_ch1_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          21.961829       1.122003        total sum                     
+2          383.000000      19.570386       Unweighted events, alpha=0.057342
+  => Total parameter prop_binch4_ch1_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          21.329222       1.190426        total sum                     
+3          321.000000      17.916473       Unweighted events, alpha=0.066446
+  => Total parameter prop_binch4_ch1_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch2 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch2
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          41.342145       5.036101        total sum                     
+0          67.000000       8.185353        Unweighted events, alpha=0.617047
+  => Total parameter prop_binch4_ch2_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          80.428688       5.197713        total sum                     
+1          239.000000      15.459625       Unweighted events, alpha=0.336522
+  => Total parameter prop_binch4_ch2_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          50.020721       3.370903        total sum                     
+2          220.000000      14.832397       Unweighted events, alpha=0.227367
+  => Total parameter prop_binch4_ch2_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          65.724802       6.046076        total sum                     
+3          118.000000      10.862780       Unweighted events, alpha=0.556990
+  => Total parameter prop_binch4_ch2_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch3 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch3
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          2847.930425     48.081777       total sum                     
+0          3508.000000     59.228372       Unweighted events, alpha=0.811839
+  => Total parameter prop_binch4_ch3_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          3354.202633     47.123438       total sum                     
+1          5066.000000     71.175839       Unweighted events, alpha=0.662101
+  => Total parameter prop_binch4_ch3_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          2109.429383     29.633541       total sum                     
+2          5067.000000     71.182863       Unweighted events, alpha=0.416307
+  => Total parameter prop_binch4_ch3_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          3672.537821     30.696033       total sum                     
+3          14314.000000    119.641130      Unweighted events, alpha=0.256570
+  => Total parameter prop_binch4_ch3_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch4 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch4
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          3728.527297     18.803998       total sum                     
+0          39316.000000    198.282627      Unweighted events, alpha=0.094835
+  => Total parameter prop_binch4_ch4_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          4976.447689     21.718592       total sum                     
+1          52502.000000    229.133149      Unweighted events, alpha=0.094786
+  => Total parameter prop_binch4_ch4_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          2574.374010     15.653824       total sum                     
+2          27046.000000    164.456681      Unweighted events, alpha=0.095185
+  => Total parameter prop_binch4_ch4_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          2047.979126     14.496464       total sum                     
+3          19958.000000    141.272786      Unweighted events, alpha=0.102614
+  => Total parameter prop_binch4_ch4_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch5 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch5
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          295.007652      6.781061        total sum                     
+0          1893.000000     43.508620       Unweighted events, alpha=0.155841
+  => Total parameter prop_binch4_ch5_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          430.713868      8.738883        total sum                     
+1          2429.000000     49.284886       Unweighted events, alpha=0.177321
+  => Total parameter prop_binch4_ch5_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          246.214189      5.674395        total sum                     
+2          1883.000000     43.393548       Unweighted events, alpha=0.130756
+  => Total parameter prop_binch4_ch5_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          202.669238      5.083389        total sum                     
+3          1590.000000     39.874804       Unweighted events, alpha=0.127465
+  => Total parameter prop_binch4_ch5_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Channel ch4_ch6 will use autoMCStats with settings: event-threshold=0, include-signal=1, hist-mode=1
+============================================================
+Analysing bin errors for: prop_binch4_ch6
+Poisson cut-off: 0
+============================================================
+Bin        Contents        Error           Notes                         
+0          1605.431333     27.597639       total sum                     
+0          3384.000000     58.172158       Unweighted events, alpha=0.474418
+  => Total parameter prop_binch4_ch6_bin0[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+1          2494.379443     33.072391       total sum                     
+1          5688.000000     75.418831       Unweighted events, alpha=0.438534
+  => Total parameter prop_binch4_ch6_bin1[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+2          1487.075926     22.294420       total sum                     
+2          4449.000000     66.700825       Unweighted events, alpha=0.334249
+  => Total parameter prop_binch4_ch6_bin2[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+3          1195.695130     18.856591       total sum                     
+3          4021.000000     63.411355       Unweighted events, alpha=0.297363
+  => Total parameter prop_binch4_ch6_bin3[0.00,-7.00,7.00] to be gaussian constrained
+------------------------------------------------------------
+Dataset data_obs not found.
+No observed data 'data_obs' in the workspace. Cannot compute limit.
+
