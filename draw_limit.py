@@ -17,7 +17,7 @@ channel = parser.parse_args().channel
 region = parser.parse_args().region
 output = f"limit_{channel}_{region}"
 
-masses = [500, 600, 700, 800, 1000, 1200, 1500, 2000]
+masses = [500, 600, 700, 800, 1000, 1200, 1500]
 
 #workspace/Combined/CombinedElectron_MN__equal__1000GeV.log
 
@@ -31,21 +31,19 @@ def get_expected_limits():
 
         limits[mass] = {}
 
-#        if not logfile in logfiles:
-#            print (f"{logfile} not in logs")
-
-        with open(f"workspace/Combined/{logfile}") as read_lines:
-            lines = read_lines.readlines()
-            for line in reversed(lines):
-                line = line.strip()
-                if " 2.5%" in line: limits[mass]["2.5%"] = float(line.split(" < ")[1])
-                if " 16.0%" in line: limits[mass]["16.0%"] = float(line.split(" < ")[1])
-                if " 50.0%" in line: limits[mass]["50.0%"] = float(line.split(" < ")[1])
-                if " 84.0%" in line: limits[mass]["84.0%"] = float(line.split(" < ")[1])
-                if " 97.5%" in line: limits[mass]["97.5%"] = float(line.split(" < ")[1])
-
-                if (len(limits[mass].keys()) == 5):
-                    break
+        for region in ["Combined", "Merged", "Resolved"]:
+            logfile = f"{region}{channel}_MN__equal__{mass}GeV.log"
+            limits[mass][region] = {}
+            with open(f"logs/cards/{region}/{logfile}") as read_lines:
+                lines = read_lines.readlines()
+                for line in reversed(lines):
+                    line = line.strip()
+                    if " 50.0%" in line: limits[mass][region]["50.0%"] = float(line.split(" < ")[1])
+                    if region == "Combined":
+                        if " 2.5%" in line: limits[mass][region]["2.5%"] = float(line.split(" < ")[1])
+                        if " 16.0%" in line: limits[mass][region]["16.0%"] = float(line.split(" < ")[1])
+                        if " 84.0%" in line: limits[mass][region]["84.0%"] = float(line.split(" < ")[1])
+                        if " 97.5%" in line: limits[mass][region]["97.5%"] = float(line.split(" < ")[1])
 
     return limits
 
@@ -57,14 +55,28 @@ def draw_limits(limits):
     y_grids_exp = array.array('d')
     y_grids_exp_1sig_down = array.array('d')
     y_grids_exp_2sig_down = array.array('d')
+    y_grids_exp_merged = array.array('d')
+    y_grids_exp_resolved = array.array('d')
 
     for mass in masses:
         x_grids.append(mass)
-        y_grids_exp_2sig_up.append(limits[mass]["97.5%"] - limits[mass]["50.0%"])
-        y_grids_exp_1sig_up.append(limits[mass]["84.0%"] - limits[mass]["50.0%"])
-        y_grids_exp.append(limits[mass]["50.0%"])
-        y_grids_exp_1sig_down.append(limits[mass]["50.0%"] - limits[mass]["16.0%"])
-        y_grids_exp_2sig_down.append(limits[mass]["50.0%"] - limits[mass]["2.5%"])
+        y_grids_exp_2sig_up.append(limits[mass]["Combined"]["97.5%"] - limits[mass]["Combined"]["50.0%"])
+        y_grids_exp_1sig_up.append(limits[mass]["Combined"]["84.0%"] - limits[mass]["Combined"]["50.0%"])
+        y_grids_exp.append(limits[mass]["Combined"]["50.0%"])
+        y_grids_exp_1sig_down.append(limits[mass]["Combined"]["50.0%"] - limits[mass]["Combined"]["16.0%"])
+        y_grids_exp_2sig_down.append(limits[mass]["Combined"]["50.0%"] - limits[mass]["Combined"]["2.5%"])
+        y_grids_exp_merged.append(limits[mass]["Merged"]["50.0%"])
+        y_grids_exp_resolved.append(limits[mass]["Resolved"]["50.0%"])
+
+    graph_exp_merged = ROOT.TGraphAsymmErrors(len(masses), x_grids, y_grids_exp_merged, 0, 0, 0, 0)
+    graph_exp_merged.SetLineColor(ROOT.kAzure+1)
+    graph_exp_merged.SetLineWidth(5)
+    graph_exp_merged.SetLineStyle(2)
+
+    graph_exp_resolved = ROOT.TGraphAsymmErrors(len(masses), x_grids, y_grids_exp_resolved, 0, 0, 0, 0)
+    graph_exp_resolved.SetLineColor(ROOT.kPink-9)
+    graph_exp_resolved.SetLineWidth(5)
+    graph_exp_resolved.SetLineStyle(2)
 
     graph_exp = ROOT.TGraphAsymmErrors(len(masses), x_grids, y_grids_exp, 0, 0, 0, 0)
     graph_exp.SetLineColor(ROOT.kBlack)
@@ -97,6 +109,8 @@ def draw_limits(limits):
     graph_exp_2sig.Draw("3same")
     graph_exp_1sig.Draw("3same")
     graph_exp.Draw("lsame")
+    graph_exp_merged.Draw("lsame")
+    graph_exp_resolved.Draw("lsame")
     hist_dummy.Draw("axissame")
 
     legend = ROOT.TLegend(0.55, 0.2, 0.9, 0.40)

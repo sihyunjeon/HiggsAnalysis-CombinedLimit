@@ -191,7 +191,7 @@ def run_combine_for_plot(mass, variable, workspace_path):
 
     os.chdir(cwd)
 
-def combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge):
+def combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge, card_type):
 
     os.chdir(workspace_path)
 
@@ -199,11 +199,16 @@ def combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge):
     for card in cards_to_merge:
         if "Selection" not in card:
             continue
-        combinecards = f"{combinecards} {card}"
+        if card_type == "Combined":
+            combinecards = f"{combinecards} {card}"
+        elif card_type in card:
+            combinecards = f"{combinecards} {card}"
+        else:
+            continue
     combinecards = f"{combinecards} > {flag_channel}_{flag_campaign}_{variable}_{mass}"
     os.system(combinecards)
-    os.system(f"cp {flag_channel}_{flag_campaign}_{variable}_{mass} {cwd}/workspace/Combined/")
-
+    os.system(f"cp {flag_channel}_{flag_campaign}_{variable}_{mass} {cwd}/workspace/{card_type}/")
+    
     os.chdir(cwd)
 
 def main():
@@ -211,6 +216,8 @@ def main():
     cards_path = f"{cwd}/cards/{flag_campaign}/"
     workspaces_path = f"{cwd}/workspace/{flag_campaign}/"
     os.system("mkdir -p workspace/Combined/")
+    os.system("mkdir -p workspace/Merged/")
+    os.system("mkdir -p workspace/Resolved/")
     os.system("mkdir -p tmp")
     rootfiles = os.listdir(rootfiles_path)
 
@@ -252,7 +259,10 @@ def main():
                         continue
                     if mass in card_in_workspace:
                         cards_to_merge.append(card_in_workspace)
-                combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge)
+                combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge, "Combined")
+                combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge, "Merged")
+                combine_cards_for_limit(mass, variable, workspace_path, cards_to_merge, "Resolved")
+
 
 if __name__ == "__main__":
 

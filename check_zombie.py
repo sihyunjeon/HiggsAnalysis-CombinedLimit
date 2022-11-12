@@ -3,7 +3,7 @@ import sys
 
 campaigns = os.listdir("workspace")
 for campaign in campaigns:
-    if campaign in ["Combined"]: continue
+    if campaign in ["Combined", "Merged", "Resolved"]: continue
     variables = os.listdir("workspace/" + campaign)
     for variable in variables:
 
