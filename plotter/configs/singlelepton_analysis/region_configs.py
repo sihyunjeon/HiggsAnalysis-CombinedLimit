@@ -1,6 +1,10 @@
 region_configs = {
 
     "Muon" : {
+        "Preselection_Muon" : {
+            "MergedInclusive" : True,
+            "ResolvedInclusive" : True,
+        },
         "SignalRegion_Muon" : {
             "MergedInclusive" : True,
             "ResolvedInclusive" : True,
@@ -24,6 +28,10 @@ region_configs = {
         },
     },
     "Electron" : {
+        "Preselection_Electron" : {
+            "MergedInclusive" : True,
+            "ResolvedInclusive" : True,
+        },
         "SignalRegion_Electron" : {
             "MergedInclusive" : True,
             "ResolvedInclusive" : True,
@@ -32,7 +40,6 @@ region_configs = {
             "ResolvedXbbSelection" : False,
             "ResolvedXbqSelection" : False,
             "ResolvedXqqSelection" : False,
-
         },
         "ControlRegion_Electron" : {
             "MergedDomWSelection" : True,

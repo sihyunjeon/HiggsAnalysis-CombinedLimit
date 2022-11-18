@@ -93,7 +93,7 @@ def get_systematics(region):
         if (True):#hist_configs[hist]["data"]):
             if flag_write:
                 outfile.cd()
-                hist_data.Write("data")
+                hist_data.Write("data_obs")
                 hist_data.GetXaxis().SetLabelSize(0)
                 ROOT.gROOT.cd()
             hist_data.Draw("samehistP")
@@ -110,7 +110,7 @@ def get_systematics(region):
         legend = get_legend(hist_backgrounds, hist_signals, hist_data)
         legend.Draw("same")
 
-        canvas.SaveAs(f"outputs/hists/{flag_campaign}/{hist_name}.pdf")
+#        canvas.SaveAs(f"outputs/hists/{flag_campaign}/{hist_name}.pdf")
 
         if flag_write:
             outfile.Close()

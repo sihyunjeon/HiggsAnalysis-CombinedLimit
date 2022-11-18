@@ -11,7 +11,6 @@ from include.args_parser import args
 
 import configs.singlelepton_analysis.root_configs
 from configs.singlelepton_analysis.sample_configs import sample_configs
-from configs.singlelepton_analysis.hist_configs import hist_configs
 
 flag_analyzer = "singlelepton_analysis"
 flag_skim = "SkimTree_SingleLepton"
@@ -136,6 +135,7 @@ def dress_histograms(histogram, hist, canvas, canvas_up, canvas_down, canvas_pad
         histogram.SetMinimum(0.1)#histogram.GetMinimum() * 0.1)
         histogram.SetMaximum(histogram.GetMaximum() * 10000.0)
         histogram.GetXaxis().SetLabelSize(0)
+        histogram.GetXaxis().SetNdivisions(505)
         histogram.GetYaxis().SetLabelSize(0.06)#0.1#0.18
         canvas_up.SetLogy()
 
@@ -289,7 +289,7 @@ def main():
         os.system(f"mkdir -p outputs/hists/check_toppt/{flag_campaign}/")
 
     for region in regions:
-        for hist in list(hist_configs.keys()):
+        for hist in list(hists.keys()):
             get_systematics(region, hist)
 
 regions = ["MergedDomWSelection", "MergedDomTTSelection", "ResolvedDomWSelection", "ResolvedDomTTSelection"]
@@ -319,6 +319,9 @@ hists = {
     "pt_lepton" : {
         "x_label" : "p_{T}(l) [GeV]",
     },
+    "eta_lepton" : {
+        "x_label" : "#eta(l)",
+    }
 }
 
 

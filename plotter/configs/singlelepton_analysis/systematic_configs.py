@@ -3,46 +3,45 @@ systematic_configs = {
     "Luminosity" : {
         "variation" : "lognormal",
         "type" : "uncorrelated",
-        "2016preVFP" : "1.012",
-        "2016postVFP" : "1.012",
+        "2016" : "1.012",
         "2017" : "1.023",
         "2018" : "1.025",
     },
     "JetRes" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "JetEn" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "JetMassScale" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
-    "JetMassRes" : {
-        "variation" : "updown",
-        "type" : "uncorrelated"
-    },
+#    "JetMassRes" : {
+#        "variation" : "updown",
+#        "type" : "uncorrelated"
+#    },
     "UnclEn" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "MuonEn" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "MuonRecoSF" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "MuonIDSF" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "MuonISOSF" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "MuonTriggerSF" : {
         "variation" : "updown",
@@ -50,19 +49,19 @@ systematic_configs = {
     },
     "ElectronRes" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "ElectronEn" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "ElectronRecoSF" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "ElectronIDSF" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "ElectronTriggerSF" : {
         "variation" : "updown",
@@ -70,11 +69,11 @@ systematic_configs = {
     },
     "Pileup" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "Prefire" : {
         "variation" : "updown",
-        "type" : "uncorrelated"
+        "type" : "correlated"
     },
     "BTagCorrH" : {
         "variation" : "updown",

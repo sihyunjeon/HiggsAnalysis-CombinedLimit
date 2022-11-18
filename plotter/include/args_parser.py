@@ -14,7 +14,9 @@ parser.add_argument('--no_data', action="store_true",
                     help='don\'t draw data points in the plots')
 parser.add_argument('--no_signal', action="store_true",
                     help='don\'t draw signal points in the plots')
+parser.add_argument('--plot', action="store_true", default=False)
 parser.add_argument('--combine', action="store_true", default=False)
+parser.add_argument('--table', action="store_true", default=False)
 
 args = parser.parse_args()
 

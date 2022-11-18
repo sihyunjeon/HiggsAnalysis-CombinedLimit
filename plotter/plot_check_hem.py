@@ -18,11 +18,11 @@ flag_skim = "SkimTree_SingleLepton"
 flag_campaign = "2018"
 flag_channel = "Electron"
 
-def get_systematics(region, hist):
+def get_systematics(region, selection, hist):
 
     root_files = check_root_files()
 
-    hist_name = f"ControlRegion_{flag_channel}{region}{hist}"
+    hist_name = f"ControlRegion_{flag_channel}{region}{selection}_{hist}"
 
     canvas, canvas_up, canvas_down = get_canvas(hist_name)
 
@@ -72,10 +72,10 @@ def get_systematics(region, hist):
     canvas_up.cd()
 
     legend_hists = {
-        "Obs. HEM included" : hist_data_withhem,
-        "Obs. HEM removed" : hist_data_central,
-        "Pre. HEM included" : hist_background_withhem,
-        "Pre. HEM removed" : hist_background_central
+        "Obs. w/ HEM" : hist_data_withhem,
+        "Obs. w/o HEM" : hist_data_central,
+        "Pre. w/ HEM" : hist_background_withhem,
+        "Pre. w/o HEM" : hist_background_central
     }
     legend = get_legend(legend_hists)
     legend.Draw("same")
@@ -272,61 +272,26 @@ def main():
         os.system(f"mkdir -p outputs/hists/check_hem/{flag_campaign}/")
 
     for region in regions:
-        for hist in list(hists.keys()):
-            get_systematics(region, hist)
+        for selection in selections:
+            for hist in list(hists.keys()):
+                get_systematics(region, selection, hist)
 
 regions = ["MergedDomWSelection", "MergedDomTTSelection", "ResolvedDomWSelection", "ResolvedDomTTSelection"]
+selections = ["CheckHEMEtaPosPhiQuad1", "CheckHEMEtaPosPhiQuad2", "CheckHEMEtaPosPhiQuad3", "CheckHEMEtaPosPhiQuad4", "CheckHEMEtaPos", "CheckHEMEtaNegPhiQuad1", "CheckHEMEtaNegPhiQuad2", "CheckHEMEtaNegPhiQuad3", "CheckHEMEtaNegPhiQuad4", "CheckHEMEtaNeg"]
 
 hists = {
-    "CheckEta1HEM_phi_lepton" : {
+    "phi_lepton" : {
         "rebin" : 1,
         "x_label" : "#phi(l)"
     },
-    "CheckEta2HEM_phi_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#phi(l)"
-    },
-    "CheckPhi1HEM_phi_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#phi(l)"
-    },
-    "CheckPhi2HEM_phi_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#phi(l)"
-    },
-    "CheckPhi3HEM_phi_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#phi(l)"
-    },
-    "CheckPhi4HEM_phi_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#phi(l)"
-    },
-    "CheckEta1HEM_eta_lepton" : {
+    "eta_lepton" : {
         "rebin" : 1,
         "x_label" : "#eta(l)"
-    },
-    "CheckEta2HEM_eta_lepton" : {
+   },
+    "pt_lepton" : {
         "rebin" : 1,
-        "x_label" : "#eta(l)"
+        "x_label" : "p_{T}(l)"
     },
-    "CheckPhi1HEM_eta_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#eta(l)"
-    },
-    "CheckPhi2HEM_eta_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#eta(l)"
-    },
-    "CheckPhi3HEM_eta_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#eta(l)"
-    },
-    "CheckPhi4HEM_eta_lepton" : {
-        "rebin" : 1,
-        "x_label" : "#eta(l)"
-    },
-
 }
 
 samples = {
